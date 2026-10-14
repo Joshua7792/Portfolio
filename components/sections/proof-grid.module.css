@@ -1,0 +1,174 @@
+/* Proof grid on forest: design spec §6.12, §7.1, §7.2, §12 (1440 row 12, 375 row 12). */
+
+.section {
+  padding-block: 96px; /* §4 section rhythm below lg */
+}
+
+.heading {
+  margin-bottom: 40px; /* §4 heading-to-content gap, mobile */
+}
+
+.header {
+  display: none; /* §7.2: no header row on mobile */
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: block;
+  border-bottom: 1px solid var(--line-forest);
+  padding-block: 24px; /* §7.2 row pad 24/24 */
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.rowLabel {
+  margin-bottom: 8px; /* §7.2: label, 8, text */
+  color: var(--cream-muted);
+}
+
+.asksText {
+  display: block;
+  color: var(--cream-muted);
+  font-size: 16px; /* §7.2: asks 16/26 on mobile */
+  line-height: 26px;
+}
+
+.built {
+  margin-top: 16px; /* §7.2: 16 between asks and the Built label */
+}
+
+/* Phase 3 ruling F4 (R-2): below 768 the "built" h3 steps down to 18/24 at 100% width (was 22/28 at 112%, 5-6 lines). */
+@media (max-width: 767px) {
+  .builtText { font-size: 18px; font-stretch: 100%; line-height: 24px; }
+}
+
+.builtText {
+  position: relative;
+  color: var(--cream);
+}
+
+/* §6.12: 2px amber line under the built text, scaleX(0) at rest. */
+.builtText::after {
+  position: absolute;
+  right: 0;
+  bottom: -5px; /* §6.12 sets no offset: the 2px line sits inside the 8 gap above the case name without touching it */
+  left: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--amber);
+  content: "";
+  transition: transform 240ms var(--ease-out-strong); /* §8 row 6 */
+}
+
+.caseName {
+  margin-top: 12px;
+  color: var(--amber);
+}
+
+.inlineIcon {
+  display: inline-block;
+  width: 16px; /* §12 375 row 12: 16px icon instead of the circle */
+  height: 16px;
+  margin-left: 8px; /* §7.2: icon inline after the label, gap 8 */
+  vertical-align: -3px; /* centers the 16px icon on the 18px mono line */
+}
+
+.circle {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 160px; /* §4 */
+  }
+
+  .heading {
+    max-width: calc((100% - 11 * 32px) / 12 * 8 + 7 * 32px); /* §7.1: h2 spans cols 1-8 */
+    margin-bottom: 64px;
+  }
+
+  .header,
+  .row {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 32px; /* §4 grid */
+  }
+
+  .header {
+    border-bottom: 1px solid var(--line-forest);
+    padding-bottom: 16px; /* §7.1 header row pb 16 */
+    color: var(--cream-muted);
+  }
+
+  .asks { grid-column: 1 / 6; }
+  .built { grid-column: 6 / 12; margin-top: 0; }
+
+  .row {
+    align-items: start;
+    padding-block: 32px; /* §6.12 padding 32 0 */
+  }
+
+  /* Per-row labels stay for screen readers; the header row carries them visually. */
+  .rowLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .asksText {
+    font-size: 22px; /* .t-lead at 1440: 22/34 */
+    line-height: 34px;
+  }
+
+  .caseName { margin-top: 8px; }
+  .inlineIcon { display: none; }
+
+  .circle {
+    display: grid;
+    width: 48px; /* §6.12: 48 circle, 1.5px amber border */
+    height: 48px;
+    grid-column: 12;
+    align-self: center;
+    justify-self: end;
+    place-items: center;
+    border: 1.5px solid var(--amber);
+    border-radius: 9999px;
+    color: var(--amber);
+    transition: transform 240ms var(--ease-out-strong); /* §8 row 6 */
+  }
+
+  .circleIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .row:hover .circle { transform: translateX(4px); }
+  .row:hover .builtText::after { transform: scaleX(1); }
+}
+
+/* Phase 3 ruling S5: keyboard focus shows the end state at once (no animation); only hover animates. */
+@media (prefers-reduced-motion: no-preference) {
+  .row:focus-visible .circle { transform: translateX(4px); transition: none; }
+  .row:focus-visible .builtText::after { transform: scaleX(1); transition: none; }
+}
+
+/* §8 reduced motion: no transform; the underline appears without movement. */
+@media (prefers-reduced-motion: reduce) {
+  .builtText::after { transform: none; opacity: 0; transition: none; }
+  .row:focus-visible .builtText::after { opacity: 1; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .row:hover .builtText::after { opacity: 1; }
+}

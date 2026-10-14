@@ -1,0 +1,264 @@
+/* Hero: spec §6.4-6.7, §7.1 (1440), §7.2 (375), §8 rows 7-13, §14.1.
+   Mobile composition below 1024, desktop composition from 1024 (spec §4: the only layout switch). */
+
+.hero {
+  --pw: 240px; /* spec §7.2 portrait 240x300 */
+  --ph: 300px;
+  /* Same fluid formulas as .t-display / .t-echo (tokens.json fontSize). */
+  --display-size: clamp(46px, 0.225px + 12.2066vw, 176px); /* spec §3.2 .t-display fluid row */
+  --echo-size: clamp(34px, 0.901px + 8.8263vw, 128px); /* spec §3.2 .t-echo fluid row */
+  position: relative;
+  z-index: 1; /* lifts the scroll badge above the next band (spec §6.7) */
+  overflow-x: clip; /* spec §4; y stays visible so the badge straddles the seam */
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Forest top band; the seam sits at portrait bottom - 96 (spec §7.2), local 560 at lg (spec §7.1). */
+.hero::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(56px + var(--ph) - 96px);
+  background: var(--forest);
+  content: "";
+}
+
+.stage {
+  position: relative;
+  max-width: none; /* Tailwind's own `container` utility caps .container at 80rem; spec §4 wants 1440 */
+  container-type: inline-size;
+  padding-top: calc(56px + var(--ph) + 32px); /* spec §7.2: role line at portrait bottom + 32 */
+  padding-bottom: 72px; /* spec §7.2 */
+}
+
+/* Display word: right-aligned echoes on mobile (spec §7.2). */
+.word {
+  position: absolute;
+  top: 24px; /* spec §7.2 */
+  right: var(--gutter);
+  left: var(--gutter);
+}
+.word :global(.echo-word) {
+  position: relative;
+  z-index: 1; /* spec §6.4: echoes under the portrait */
+  text-align: right;
+}
+
+.portrait,
+.sparkles {
+  position: absolute;
+  top: 56px; /* spec §7.2 */
+  left: var(--gutter);
+  width: var(--pw);
+  height: var(--ph);
+}
+.portrait { z-index: 2; } /* spec §6.4 */
+.sparkles { z-index: 4; pointer-events: none; } /* spec §7.1 sparkles z 4 */
+.frame { width: 100%; height: 100%; }
+.frame :global(img) { filter: url(#duo-hero); }
+
+.sparkle { position: absolute; color: var(--amber); }
+.s1, .s2, .s3, .s4 { display: none; }
+/* Mobile sparkles, centers relative to the portrait box (spec §7.2: (20,356,32) and (260,312,24)). */
+.m1 { bottom: -16px; left: -16px; }
+.m2 { right: -12px; bottom: 32px; }
+
+.headline { position: relative; z-index: 4; }
+
+.handles {
+  position: relative;
+  z-index: 4;
+  margin: 24px 0 0; /* spec §7.2 */
+  padding: 0;
+  list-style: none;
+}
+.handleLink {
+  display: inline-block;
+  text-decoration: none;
+}
+/* 44px touch targets below 1024 (spec §9) without moving the 24px lines: the first link grows
+   upward into the gap above, later links grow downward. */
+@media (max-width: 1023px) {
+  .handles li:first-child .handleLink { margin-top: -20px; padding-top: 20px; }
+  .handles li:not(:first-child) .handleLink { margin-bottom: -20px; padding-bottom: 20px; }
+}
+.handleText { position: relative; }
+
+.badgeWrap {
+  position: absolute;
+  z-index: 10; /* spec §6.7 */
+  bottom: -44px; /* spec §6.7: center on the hero's bottom edge */
+  left: 50%;
+  width: 88px; /* spec §6.7 */
+  height: 88px;
+  margin-left: -44px;
+}
+.badge {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-content: center;
+  border-radius: 9999px;
+  background: var(--amber);
+  color: var(--ink);
+  text-align: center;
+  text-decoration: none;
+}
+.badge span { display: block; }
+/* The ring straddles two bands (ink above, cream below); drawn inside the amber disc it keeps 8.63:1. */
+.badge:focus-visible { outline-color: var(--ink); outline-offset: -8px; }
+
+@media (min-width: 768px) {
+  .hero { --pw: 320px; --ph: 400px; } /* spec §7.2 / §13: 320x400 from 768 to 1023 */
+}
+
+@media (min-width: 1024px) {
+  .hero { height: 840px; } /* spec §7.1 */
+  .hero::before { height: 560px; } /* spec §7.1 */
+
+  .stage {
+    --col: calc((100cqw - 11 * 32px) / 12); /* spec §4: 12 columns, 32 gap */
+    --col8: calc(var(--gutter) + 7 * var(--col) + 7 * 32px); /* x of column 8 */
+    height: 100%;
+    padding-block: 0;
+  }
+
+  .word {
+    top: 136px; /* spec §7.1 */
+    left: auto;
+    width: max-content;
+  }
+  .word :global(.echo-word) { text-align: left; }
+  /* Echo 2 box ends at the end of column 7 (spec §7.1): drop columns 8-12 and their 5 gaps. */
+  .word :global(.echo-word):nth-of-type(3) { width: calc(100% - 5 * var(--col) - 5 * 32px); }
+
+  .portrait,
+  .sparkles {
+    top: auto;
+    bottom: 200px; /* spec §7.1: portrait bottom fixed at local y 640 */
+    width: calc(4 * var(--col) + 3 * 32px); /* spec §7.1: columns 1-4 */
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .s1, .s2, .s3, .s4 { display: block; }
+  .m1, .m2 { display: none; }
+  /* Centers relative to the portrait box (spec §7.1: (64,168,48), (88,236,28), (88,596,28), (64,640,56)). */
+  .s1 { top: 24px; left: -24px; }
+  .s2 { top: 102px; left: 10px; }
+  /* B5 D5 ruling: sparkles 1-2 sit on the amber duotone field, so they print in ink (spec §6.3 ink-on-amber). */
+  .s1, .s2 { color: var(--ink); }
+  .s3 { bottom: 30px; left: 10px; }
+  .s4 { bottom: -28px; left: -28px; }
+
+  .headline {
+    position: absolute;
+    top: 656px; /* spec §14.1 */
+    right: var(--gutter);
+    left: var(--col8); /* spec §7.1: columns 8-12 */
+  }
+
+  /* Vertically centered in the echo 2 row (spec §7.1). */
+  .handles {
+    position: absolute;
+    top: calc(136px + var(--display-size) + 0.875 * var(--echo-size));
+    left: var(--col8);
+    display: flex;
+    height: calc(0.875 * var(--echo-size));
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .badgeWrap {
+    bottom: -64px; /* spec §6.7 */
+    width: 128px;
+    height: 128px;
+    margin-left: -64px;
+  }
+}
+
+/* Phase 3 ruling S2 (R-2): on desktop windows 860px tall or less, a 760 stage keeps the positioning headline above
+   the fold (headline top at page y 80 + 576 = 656, bottom 758 for 3 lines). The portrait keeps bottom 200 and rises
+   80px. Windows taller than 860 (1440x900) keep the §7.1 composition exactly. */
+@media (min-width: 1024px) and (max-height: 860px) {
+  .hero { height: 760px; }
+  .hero::before { height: 480px; }
+  .word { top: 96px; }
+  .handles { top: calc(96px + var(--display-size) + 0.875 * var(--echo-size)); }
+  .headline { top: 576px; }
+}
+
+/* Spec §8 rows 8-13: the hero entrance is CSS keyframes from the server-rendered HTML (fill-mode both), so it starts
+   at first paint instead of waiting for hydration. The hidden start state applies only under html.js (spec §8). */
+@keyframes hero-rise-24 { from { opacity: 0; transform: translateY(24px); } }
+@keyframes hero-rise-16 { from { opacity: 0; transform: translateY(16px); } }
+@keyframes hero-rise-8 { from { opacity: 0; transform: translateY(8px); } }
+@keyframes hero-slide { from { opacity: 0; transform: translateX(-12px); } }
+@keyframes hero-spark { from { opacity: 0; transform: scale(0.6) rotate(-45deg); } }
+@keyframes hero-fade { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* spec §8 row 8 */
+  :global(.js) .portrait { animation: hero-rise-24 var(--hero-duration) var(--ease-out-strong) both; }
+  /* spec §8 row 9 */
+  :global(.js) .word :global(.display-word) { animation: hero-rise-16 var(--hero-duration) var(--ease-out-strong) 80ms both; }
+  /* spec §8 row 10: 200 / 260 / 320 */
+  :global(.js) .word :global(.echo-word) { animation: hero-slide var(--hero-echo-duration) var(--ease-out-strong) 200ms both; }
+  :global(.js) .word :global(.echo-word):nth-of-type(3) { animation-delay: 260ms; }
+  :global(.js) .word :global(.echo-word):nth-of-type(4) { animation-delay: 320ms; }
+  /* spec §8 rows 11 and 13 */
+  :global(.js) .headline,
+  :global(.js) .handles { animation: hero-rise-8 var(--hero-entrance-duration) var(--ease-out-strong) 380ms both; }
+  :global(.js) .badgeWrap { animation: hero-rise-8 var(--hero-entrance-duration) var(--ease-out-strong) 560ms both; }
+  /* spec §8 row 12: 440ms, +40 each */
+  :global(.js) .sparkle { animation: hero-spark var(--hero-echo-duration) var(--ease-out-strong) 440ms both; }
+  :global(.js) .s2, :global(.js) .m2 { animation-delay: 480ms; }
+  :global(.js) .s3 { animation-delay: 520ms; }
+  :global(.js) .s4 { animation-delay: 560ms; }
+
+  /* spec §8 row 7: press feedback everywhere, hover scale on fine pointers only */
+  .badge { transition: transform 200ms var(--ease-out-strong); }
+  .badge:active { transform: scale(0.97); transition-duration: 120ms; }
+}
+
+/* spec §8 reduced motion: every hero layer fades in over 200ms, together, without moving. */
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .portrait,
+  :global(.js) .headline,
+  :global(.js) .handles,
+  :global(.js) .badgeWrap,
+  :global(.js) .sparkle,
+  :global(.js) .word :global(.display-word),
+  :global(.js) .word :global(.echo-word) { animation: hero-fade var(--hero-fade-duration) var(--ease-standard) both; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Same underline as the nav (spec §6.6, §8 row 1). */
+  .handleText::after {
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: var(--amber);
+    content: "";
+    transition: transform 200ms var(--ease-out-strong);
+  }
+  .handleLink:hover .handleText::after,
+  .handleLink:focus-visible .handleText::after { transform: scaleX(1); }
+  /* Phase 3 ruling S5: keyboard focus shows the end state at once; only hover animates. */
+  .handleLink:focus-visible .handleText::after { transition: none; }
+}
+
+/* spec §8 reduced motion: row 1 underline is instant. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .handleText::after { transition: none; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .badge:hover { transform: scale(1.04); }
+  .badge:hover:active { transform: scale(0.97); }
+}

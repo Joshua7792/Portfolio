@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1312 738" role="img" aria-labelledby="t d">
+<title id="t">Joshua-OS architecture</title>
+<desc id="d">AGENTS.md and nine rule files load into every session. The SOP runs left to right: coordinate, plan, build, verify, ship, learn. Build fans out into parallel worktree lanes with one builder agent each, merging to main behind a backup ref; verify routes to reviewer agents; learn writes to lessons and memory. Each project keeps one todo file.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0F1A14"/></marker></defs>
+<g font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace">
+<rect width="1312" height="738" fill="#F3EBDC"/>
+<rect x="48" y="56" width="560" height="100" rx="4" fill="#24412F" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="328.0" y="100.0" text-anchor="middle" font-size="20" fill="#F3EBDC">AGENTS.md and 9 rule files</text>
+<text x="328.0" y="126.0" text-anchor="middle" font-size="20" fill="#F3EBDC">load into every session</text>
+<rect x="704" y="56" width="560" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="984.0" y="100.0" text-anchor="middle" font-size="20" fill="#0F1A14">Each project keeps</text>
+<text x="984.0" y="126.0" text-anchor="middle" font-size="20" fill="#0F1A14">one todo file</text>
+<path d="M328 156 L328 262" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="48" y="262" width="1216" height="170" rx="6" fill="none" stroke="#0F1A14" stroke-width="1.5" stroke-dasharray="7 6"/>
+<text x="64" y="286" text-anchor="start" font-size="13" fill="#5C5A4F">SOP STAGES</text>
+<rect x="72.0" y="308" width="164" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="154.0" y="365.0" text-anchor="middle" font-size="20" fill="#0F1A14">Coordinate</text>
+<path d="M236.0 358 L272.8 358" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="272.8" y="308" width="164" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="354.8" y="365.0" text-anchor="middle" font-size="20" fill="#0F1A14">Plan</text>
+<path d="M436.8 358 L473.6 358" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="473.6" y="308" width="164" height="100" rx="4" fill="#F2A516" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="555.6" y="365.0" text-anchor="middle" font-size="20" fill="#0F1A14">Build</text>
+<path d="M637.6 358 L674.4 358" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="674.4" y="308" width="164" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="756.4" y="365.0" text-anchor="middle" font-size="20" fill="#0F1A14">Verify</text>
+<path d="M838.4 358 L875.2 358" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="875.2" y="308" width="164" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="957.2" y="365.0" text-anchor="middle" font-size="20" fill="#0F1A14">Ship</text>
+<path d="M1039.2 358 L1076.0 358" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="1076.0" y="308" width="164" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="1158.0" y="365.0" text-anchor="middle" font-size="20" fill="#0F1A14">Learn</text>
+<path d="M555.6 408 L555.6 520" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M756.4 408 L756.4 520" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M1158.0 408 L1158.0 520" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="400" y="520" width="240" height="110" rx="4" fill="#F2A516" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="520.0" y="557.9" text-anchor="middle" font-size="18" fill="#0F1A14">Parallel worktree</text>
+<text x="520.0" y="581.3" text-anchor="middle" font-size="18" fill="#0F1A14">lanes, one builder</text>
+<text x="520.0" y="604.7" text-anchor="middle" font-size="18" fill="#0F1A14">agent each</text>
+<text x="520" y="664" text-anchor="middle" font-size="14" fill="#5C5A4F">merge to main behind a backup ref</text>
+<rect x="700" y="520" width="200" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="800.0" y="581.3" text-anchor="middle" font-size="18" fill="#0F1A14">Reviewer agents</text>
+<rect x="1020" y="520" width="240" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="1140.0" y="581.3" text-anchor="middle" font-size="18" fill="#0F1A14">Lessons and memory</text>
+</g>
+</svg>

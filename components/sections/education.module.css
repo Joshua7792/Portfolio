@@ -1,0 +1,115 @@
+/* Education and certifications on cream: design spec §7.1, §7.2, §12 (1440 row 15). */
+
+.section {
+  padding-block: 96px; /* §4 section rhythm below lg */
+}
+
+.heading {
+  margin-bottom: 40px; /* §4 heading-to-content gap, mobile */
+}
+
+.columns {
+  display: grid;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1.5px solid var(--ink); /* closes the last 1.5px row rule */
+  list-style: none;
+}
+
+.list > li {
+  border-top: 1.5px solid var(--ink); /* §5: 1.5px Education/Cert row tops */
+}
+
+.eduRow {
+  display: grid;
+  gap: 8px;
+  padding-block: 24px; /* §7.1 pad 24/24 */
+}
+
+.date {
+  color: var(--amber-ink); /* §2.1: amber-family text on cream */
+}
+
+.degree {
+  color: var(--ink);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.certHeading {
+  margin-top: 56px; /* §7.2: 56 gap before the Certifications block */
+  margin-bottom: 24px;
+}
+
+/* Mobile §7.2: sparkle, name wraps, date on its own line below the name (4 gap). */
+.certRow {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 4px;
+  align-items: start;
+  padding-block: 20px; /* §7.1 cert row pad 20/20 */
+}
+
+.spark {
+  margin-top: 5px; /* centers the 16px mark on the first 26px body line */
+  color: var(--amber);
+}
+
+.certName {
+  font-weight: 600; /* §7.1: cert name body 600 */
+}
+
+.certDate {
+  grid-column: 2;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 160px; /* §4 */
+  }
+
+  .heading {
+    max-width: calc((100% - 11 * 32px) / 12 * 8 + 7 * 32px); /* §7.1: h2 spans cols 1-8 */
+    margin-bottom: 64px;
+  }
+
+  /* Cols 1-6 and 7-12 (x 64 and 736 at 1440). The h2 names the left column; the right one gets its h3. */
+  .columns {
+    grid-template-areas: ". cert-heading" "education certs";
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+
+  .educationList { grid-area: education; align-self: start; }
+  .certList { grid-area: certs; align-self: start; }
+
+  .certHeading {
+    grid-area: cert-heading;
+    margin-top: 0;
+    margin-bottom: 32px; /* §7.1: 32 gap */
+  }
+
+  .certRow {
+    grid-template-columns: 16px minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: baseline;
+  }
+
+  .spark {
+    align-self: start;
+    margin-top: 7px; /* centers the mark on the 30px body line */
+  }
+
+  .certDate {
+    grid-column: 3;
+    padding-left: 16px;
+    text-align: right;
+    white-space: nowrap;
+  }
+}

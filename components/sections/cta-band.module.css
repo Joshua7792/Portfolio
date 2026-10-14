@@ -1,0 +1,115 @@
+/* Resume band on amber: design spec §7.1, §7.2, §6.2 inverse pill, §12 (1440 row 16, 375 row 15). */
+
+.section {
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  padding-block: 80px; /* §4 resume band 80/80 below lg */
+}
+
+.heading,
+.body,
+.note {
+  color: var(--ink);
+}
+
+.body {
+  margin-top: 12px; /* §7.2: h2, 12, body */
+}
+
+.actions {
+  margin-top: 32px; /* §7.2: body, 32, button */
+}
+
+/* Mobile pill: §6.2 lg-m, h56, padding-x 28, 17/24, full width (335 at 375). */
+.button:global(.button) {
+  width: 100%;
+  min-height: 56px;
+  padding-inline: 28px;
+  font-size: 17px;
+  line-height: 24px;
+}
+
+/* R-2 T1: from 768 the pill sizes to its label (spec §6.2); full width is the phone layout only. */
+@media (min-width: 768px) {
+  .button:global(.button) { width: auto; }
+}
+
+.note {
+  margin-top: 12px; /* §7.1 / §7.2: note 12 below the button */
+}
+
+.sparkLarge,
+.sparkSmall,
+.sparkMobile {
+  position: absolute;
+  color: var(--ink); /* §6.3: ink on the amber band */
+}
+
+.sparkLarge,
+.sparkSmall {
+  display: none;
+}
+
+.sparkMobile {
+  top: 20px; /* §7.2: 40 centered at (335, 40 local) */
+  right: var(--gutter);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 32px;
+    align-items: center; /* §7.1: button block vertically centered on h2 + body */
+    padding-block: 120px; /* §4 resume band 120/120 */
+  }
+
+  .copy {
+    grid-column: 1 / 9; /* §7.1: cols 1-8 */
+  }
+
+  .body {
+    margin-top: 16px; /* §7.1: 16 gap */
+  }
+
+  .actions {
+    display: flex;
+    grid-column: 10 / 13; /* §7.1: cols 10-12, right-aligned */
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 0;
+  }
+
+  .button:global(.button) {
+    width: auto;
+    min-height: 64px; /* §6.2 lg: h64, padding-x 36, 18/24 */
+    padding-inline: 36px;
+    font-size: 18px;
+  }
+
+  .note {
+    text-align: right;
+  }
+
+  .sparkMobile {
+    display: none;
+  }
+
+  .sparkLarge,
+  .sparkSmall {
+    display: block;
+  }
+
+  .sparkLarge {
+    top: 16px; /* §7.1: 64 centered at (1336, 48 local) */
+    right: 72px;
+  }
+
+  .sparkSmall {
+    top: 88px; /* §7.1: 32 centered at (1288, 104 local) */
+    right: 136px;
+  }
+}

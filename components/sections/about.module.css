@@ -1,0 +1,84 @@
+/* About: spec §6.5, §6.8, §7.1 (1440), §7.2 (375), §14.5. */
+
+.about {
+  padding-block: 96px; /* spec §4: landing sections 96/96 below lg */
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.grid {
+  max-width: none; /* Tailwind's own `container` utility caps .container at 80rem; spec §4 wants 1440 */
+  display: grid;
+  row-gap: 48px; /* spec §7.2: chips to photo */
+}
+
+.bio {
+  max-width: 640px; /* spec §3.2 prose max width */
+  margin-top: 24px; /* spec §7.2 */
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* spec §7.2 */
+  margin: 32px 0 0; /* spec §7.2 */
+  padding: 0;
+  list-style: none;
+}
+.chips :global(.chip) { font-weight: 500; } /* spec §14.5: value in .t-small ink 500 */
+
+.photo {
+  position: relative;
+  width: 240px; /* spec §7.2: 240x300 */
+  aspect-ratio: 4 / 5;
+  margin-bottom: 16px; /* room for the offset block */
+}
+
+/* Forest offset block, same size, under the photo (spec §7.1 / §7.2). */
+.block {
+  position: absolute;
+  top: 16px; /* spec §7.2: offset 16/16 */
+  left: 16px;
+  width: 100%;
+  height: 100%;
+  background: var(--forest);
+}
+
+.frame { width: 100%; height: 100%; }
+.frame :global(img) { filter: url(#duo-about); }
+
+.sparkle {
+  position: absolute;
+  top: -20px; /* spec §7.1: 40px sparkle centered on the photo's top-left corner */
+  left: -20px;
+  display: none;
+  color: var(--amber);
+}
+
+/* R-2 T3 (768-1023): the md portrait size (spec §13, 320) set to the right like the desktop column, not stranded left. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .photo { width: 320px; justify-self: end; margin-right: 24px; }
+  .block { top: 24px; left: 24px; }
+}
+
+@media (min-width: 1024px) {
+  .about { padding-block: 160px; } /* spec §4 */
+
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 32px; /* spec §4 */
+    align-items: start; /* spec §7.1: text top-aligned with the photo top */
+  }
+
+  .text { grid-column: 1 / 7; } /* spec §7.1: columns 1-6 */
+  .bio { margin-top: 32px; } /* spec §7.1 */
+  .chips { gap: 12px; margin-top: 40px; } /* spec §7.1 */
+
+  .photo {
+    grid-column: 9 / 12; /* spec §7.1: columns 9-11 */
+    width: auto;
+    margin-bottom: 24px; /* section height = 160 + max(text, 404) + 160 */
+  }
+  .block { top: 24px; left: 24px; } /* spec §7.1: offset 24/24 */
+  .sparkle { display: block; }
+}

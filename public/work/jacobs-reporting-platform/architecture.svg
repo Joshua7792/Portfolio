@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1312 738" role="img" aria-labelledby="t d">
+<title id="t">Jacobs reporting platform architecture</title>
+<desc id="d">Ten source workbook roles flow through three paths: the reports ETL, the safety and quality extractors, and FastAPI readers run in-process. All three write JSON, which is baked into JS data files. One static HTML page renders 26 views from them.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0F1A14"/></marker></defs>
+<g font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace">
+<rect width="1312" height="738" fill="#F3EBDC"/>
+<text x="48" y="56" text-anchor="start" font-size="13" fill="#5C5A4F">SOURCE WORKBOOKS</text>
+<text x="322" y="56" text-anchor="start" font-size="13" fill="#5C5A4F">THREE PATHS</text>
+<rect x="48" y="100" width="230" height="120" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="163.0" y="142.9" text-anchor="middle" font-size="18" fill="#0F1A14">Cost report,</text>
+<text x="163.0" y="166.3" text-anchor="middle" font-size="18" fill="#0F1A14">6-column P6 export</text>
+<text x="163.0" y="189.7" text-anchor="middle" font-size="18" fill="#0F1A14">milestones</text>
+<rect x="322" y="100" width="250" height="120" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="447.0" y="166.3" text-anchor="middle" font-size="18" fill="#0F1A14">Reports ETL</text>
+<path d="M278 160 L322 160" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M572 160 L616 160" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="48" y="310" width="230" height="120" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="163.0" y="364.6" text-anchor="middle" font-size="18" fill="#0F1A14">Safety log</text>
+<text x="163.0" y="388.0" text-anchor="middle" font-size="18" fill="#0F1A14">and quality log</text>
+<rect x="322" y="310" width="250" height="120" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="447.0" y="364.6" text-anchor="middle" font-size="18" fill="#0F1A14">Safety and quality</text>
+<text x="447.0" y="388.0" text-anchor="middle" font-size="18" fill="#0F1A14">extractors</text>
+<path d="M278 370 L322 370" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M572 370 L616 370" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="48" y="520" width="230" height="120" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="163.0" y="574.6" text-anchor="middle" font-size="18" fill="#0F1A14">Five workforce</text>
+<text x="163.0" y="598.0" text-anchor="middle" font-size="18" fill="#0F1A14">trackers</text>
+<rect x="322" y="520" width="250" height="120" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="447.0" y="574.6" text-anchor="middle" font-size="18" fill="#0F1A14">FastAPI readers</text>
+<text x="447.0" y="598.0" text-anchor="middle" font-size="18" fill="#0F1A14">run in-process</text>
+<path d="M278 580 L322 580" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M572 580 L616 580" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="616" y="100" width="130" height="540" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="681.0" y="377.0" text-anchor="middle" font-size="20" fill="#0F1A14">JSON</text>
+<path d="M746 370 L790 370" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="790" y="100" width="210" height="540" rx="4" fill="#24412F" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="895.0" y="364.0" text-anchor="middle" font-size="20" fill="#F3EBDC">Baked into</text>
+<text x="895.0" y="390.0" text-anchor="middle" font-size="20" fill="#F3EBDC">JS data files</text>
+<path d="M1000 370 L1044 370" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="1044" y="100" width="220" height="540" rx="4" fill="#F2A516" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="1154.0" y="351.0" text-anchor="middle" font-size="20" fill="#0F1A14">One static</text>
+<text x="1154.0" y="377.0" text-anchor="middle" font-size="20" fill="#0F1A14">HTML page</text>
+<text x="1154.0" y="403.0" text-anchor="middle" font-size="20" fill="#0F1A14">26 views</text>
+</g>
+</svg>

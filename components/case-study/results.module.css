@@ -1,0 +1,46 @@
+/* Spec §7.4 (375): tiles stacked full width, gap 16, padding 24, stat 44/48. */
+.grid {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item { min-width: 0; }
+.tile { height: 100%; }
+
+/* The shared StatTile renders div.stat-tile > p.t-mono-stat + p.t-small; child selectors avoid :global() inside @media.
+   Spec §6.14 tile: cream, 1.5px ink border, radius 0, stat then a 16 gap then the label in .t-small muted (max 3 lines). */
+.tile > div {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 16px;
+  border: 1.5px solid var(--ink);
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.tile > div > p:first-child { overflow-wrap: anywhere; }
+
+.tile > div > p:last-child {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+@media (min-width: 1024px) {
+  /* Spec §6.14 (lg): padding 32, min-height 208. */
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .tile > div {
+    min-height: 208px;
+    padding: 32px;
+  }
+}

@@ -1,0 +1,26 @@
+/* Spec §7.4 (375): single column, 335x209 figures, gap 32. */
+.grid { display: grid; gap: 32px; }
+
+.cell { min-width: 0; }
+.figure { margin: 0; }
+.media { position: relative; }
+
+/* Phase 3 ruling F8: the whole image is the link to the full-size file; the ring sits just outside it. */
+.open { display: block; }
+.open:focus-visible { outline-offset: 3px; }
+
+/* Captions: 12 gap, mono label muted. §7.3 targets 2 lines; they are never clamped, because a cut caption hides
+   content (two captions need 3 lines at 375). Every caption fits 2 lines at 1440 (B5 measurement). */
+.caption {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+@media (min-width: 1024px) {
+  /* Spec §7.3 (1440): 2 x 640 with a 32 column gap and a 48 row gap. */
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 32px;
+  }
+  .full { grid-column: 1 / -1; }
+}

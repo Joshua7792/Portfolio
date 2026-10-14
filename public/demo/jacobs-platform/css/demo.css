@@ -1,0 +1,14 @@
+
+:root{--demo-banner-h:34px}
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:2147483647;height:var(--demo-banner-h);
+  box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:8px 16px;
+  background:#F2A516;color:#0F1A14;font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:14px;line-height:18px;font-weight:500;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body{padding-top:var(--demo-banner-h)}
+.app{min-height:calc(100vh - var(--demo-banner-h))}
+.sidebar{top:var(--demo-banner-h);height:calc(100vh - var(--demo-banner-h))}
+.topbar{top:var(--demo-banner-h)}
+@media(max-width:860px){.sidebar{top:var(--demo-banner-h);height:calc(100vh - var(--demo-banner-h))}}
+@media(max-width:480px){:root{--demo-banner-h:52px}.demo-banner{white-space:normal}}
+/* Portfolio iframe at 335px: the project name collided with "CM Team"; the client name and team stay. */
+@media(max-width:480px){.topbar .divider,.topbar .proj{display:none}}

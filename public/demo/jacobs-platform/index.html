@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo Project Control Tower</title>
+  <meta name="description" content="Demo Project construction-management dashboard with synthetic data: budget, schedule, progress, safety observations and quality logs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%230B6E4F'/><text x='12' y='17' font-size='14' font-family='Segoe UI,sans-serif' font-weight='800' fill='white' text-anchor='middle'>D</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/interact.css">
+  <link rel="stylesheet" href="css/v3.css">
+  <link rel="stylesheet" href="css/workforce.css">
+  <link rel="stylesheet" href="css/sor.css">
+  <link rel="stylesheet" href="css/quality.css">
+  <link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+  <aside class="demo-banner" aria-label="Demo data notice">Synthetic data. Structure identical to production.</aside>
+  <div class="app" id="app"><noscript>This dashboard needs JavaScript enabled.</noscript></div>
+  <script src="js/data.js"></script>
+  <script src="js/sor-data.js"></script>
+  <script src="js/quality-data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/insights.js"></script>
+  <script src="js/details.js"></script>
+  <script src="js/interact.js"></script>
+  <!-- Workforce (ported workforce app) -->
+  <script src="js/workforce-common.js"></script>
+  <!-- REPORTS ▸ SOR (Assets/SOR; window.SORDATA). Loads after workforce-common.js,
+       which provides the shared window.WFUI helpers + record-modal engine. -->
+  <script src="js/sor-page.js"></script>
+  <!-- QUALITY (Assets/Quality; window.QUALITY) — two logs, two pages. quality-common.js
+       defines window.QL and MUST load first; it in turn needs workforce-common.js for the
+       shared window.WFUI helpers + record-modal engine. -->
+  <script src="js/quality-common.js"></script>
+  <script src="js/quality-training.js"></script>
+  <script src="js/quality-signature.js"></script>
+  <script src="js/demo.js"></script>
+</body>
+</html>

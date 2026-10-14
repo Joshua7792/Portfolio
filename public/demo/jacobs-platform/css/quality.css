@@ -1,0 +1,47 @@
+
+.ql-dist { display: flex; align-items: center; gap: 10px; margin: 9px 0; }
+.ql-dist-lab { flex: 0 0 42%; max-width: 260px; font-size: 12.5px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.ql-dist-n { flex: 0 0 34px; text-align: right; font-weight: 700;
+  font-variant-numeric: tabular-nums; font-size: 12.5px; }
+.ql-dist .progress > i.is-blank {
+  background: repeating-linear-gradient(45deg,
+    color-mix(in srgb, var(--muted) 34%, transparent) 0 4px,
+    transparent 4px 8px);
+}
+.ql-sessions { display: block; width: 100%; }
+.ql-cell { display: block; max-width: 170px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.ql-flags { display: flex; flex-wrap: wrap; gap: 4px; }
+.ql-flags .badge { font-size: 10.5px; }
+.ql-single { margin: 8px 0 0; font-size: 11.5px; color: var(--muted); }
+.ql-steps { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; color: var(--muted); }
+.ql-steps li { margin: 5px 0; }
+.ql-steps b, .ql-steps code { color: var(--ink); }
+.ql-longtext { white-space: pre-wrap; }
+.ql-crosslink { display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 16px; padding: 12px 14px; border: 1px solid var(--border);
+  border-left-width: 4px; border-radius: 10px; background: var(--card);
+  font-size: 13px; }
+.ql-crosslink > div { flex: 1 1 260px; }
+.ql-crosslink.is-ok { border-left-color: var(--under); }
+.ql-crosslink.is-gap { border-left-color: var(--over); }
+.ql-recon { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ql-recon-tile { padding: 12px 14px; border: 1px solid var(--border);
+  border-top-width: 3px; border-radius: 10px; background: var(--bg-2, transparent); }
+.ql-recon-tile.is-ok { border-top-color: var(--under); }
+.ql-recon-tile.is-gap { border-top-color: var(--over); }
+.ql-recon-tile.is-wait { border-top-color: var(--st-progress); }
+.ql-recon-n { font-size: 26px; font-weight: 800; line-height: 1.1;
+  font-variant-numeric: tabular-nums; }
+.ql-recon-lab { margin-top: 2px; font-size: 12.5px; font-weight: 600; }
+.ql-recon-sub { margin-top: 2px; font-size: 11.5px; color: var(--muted); }
+.ql-gap-h { margin: 0 0 8px; font-size: 12.5px; font-weight: 600; }
+.ql-gap-none { margin: 0; padding: 10px 12px; border-radius: 8px; font-size: 12.5px;
+  color: var(--under);
+  background: color-mix(in srgb, var(--under) 10%, transparent); }
+@media (max-width: 720px) {
+  .ql-dist-lab { flex: 0 0 40%; }
+  .ql-cell { max-width: 120px; }
+  .ql-recon { grid-template-columns: 1fr; }
+}

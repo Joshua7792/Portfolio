@@ -1,0 +1,58 @@
+/* Spec §7.4 (375): 2x2 grid, column gap 16, row gap 24, pad 32/32. */
+.band {
+  border-bottom: 1px solid var(--line-cream);
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
+  margin-block: 0;
+  padding-block: 32px;
+}
+
+.cell { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.cell dt { color: var(--muted); }
+.cell dd { margin: 0; overflow-wrap: anywhere; }
+
+/* Below 1024 the long stack list gets a full row: Role and Period share row 1, then Stack, then Links. */
+.period { order: 1; }
+.stack { order: 2; grid-column: 1 / -1; }
+.linksCell { order: 3; grid-column: 1 / -1; }
+
+.links { display: grid; gap: 4px; }
+
+.link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  color: var(--signal);
+}
+
+.linkIcon {
+  flex: none;
+  transition: transform 200ms var(--ease-out-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover .linkIcon { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link:hover .linkIcon { transform: none; }
+}
+
+@media (min-width: 1024px) {
+  /* Spec §7.3 (1440): pad 48/48, 4 columns of 304 (3 grid columns each, gap 32). */
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+    padding-block: 48px;
+  }
+  .period, .stack, .linksCell { order: 0; grid-column: auto; }
+  .wide { grid-column: span 2; }
+  .link { min-height: 30px; }
+}

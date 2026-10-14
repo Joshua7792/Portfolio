@@ -1,0 +1,35 @@
+/* Spec §7.4 (375): diagram 335x188 (16:9), pad 16, caption, then an "Open diagram" link. */
+.figure { margin: 0; }
+
+.slot {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 16px;
+  border: 1.5px solid var(--ink);
+  background: var(--cream-deep);
+}
+
+.canvas { position: relative; min-height: 0; }
+.image { object-fit: contain; }
+
+.caption {
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+  color: var(--muted);
+}
+
+.open {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-self: start;
+  color: var(--signal);
+}
+
+@media (min-width: 1024px) {
+  /* Spec §7.3 (1440): slot 1312x738, cream-deep, 1.5px ink, pad 48. The open link is a 375 affordance only. */
+  .slot { padding: 48px; }
+  .open { display: none; }
+}

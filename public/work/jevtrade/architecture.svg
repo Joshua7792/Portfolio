@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1312 738" role="img" aria-labelledby="t d">
+<title id="t">JevTrade architecture</title>
+<desc id="d">A cached market-data store feeds two packages. The lab runs strategies through walk-forward, purge and the sealed vault. The jevtest package builds anonymised snapshots, asks Jev typed questions, caches the answers and scores them against baselines with bootstrap confidence intervals. AST-checked walls separate both packages from the paper-order code. Results land in an append-only notebook.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0F1A14"/></marker></defs>
+<g font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace">
+<rect width="1312" height="738" fill="#F3EBDC"/>
+<rect x="48" y="92" width="160" height="300" rx="4" fill="#24412F" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="128.0" y="224.9" text-anchor="middle" font-size="18" fill="#F3EBDC">Cached</text>
+<text x="128.0" y="248.3" text-anchor="middle" font-size="18" fill="#F3EBDC">market-data</text>
+<text x="128.0" y="271.7" text-anchor="middle" font-size="18" fill="#F3EBDC">store</text>
+<rect x="222" y="62" width="900" height="150" rx="6" fill="none" stroke="#0F1A14" stroke-width="1.5" stroke-dasharray="7 6"/>
+<text x="238" y="86" text-anchor="start" font-size="13" fill="#5C5A4F">LAB</text>
+<rect x="236" y="92" width="196" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="334.0" y="148.3" text-anchor="middle" font-size="18" fill="#0F1A14">Strategies</text>
+<rect x="460" y="92" width="196" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="558.0" y="148.3" text-anchor="middle" font-size="18" fill="#0F1A14">Walk-forward</text>
+<rect x="684" y="92" width="196" height="100" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="782.0" y="148.3" text-anchor="middle" font-size="18" fill="#0F1A14">Purge</text>
+<rect x="908" y="92" width="196" height="100" rx="4" fill="#F2A516" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="1006.0" y="148.3" text-anchor="middle" font-size="18" fill="#0F1A14">Sealed vault</text>
+<rect x="222" y="232" width="900" height="170" rx="6" fill="none" stroke="#0F1A14" stroke-width="1.5" stroke-dasharray="7 6"/>
+<text x="238" y="256" text-anchor="start" font-size="13" fill="#5C5A4F">JEVTEST</text>
+<rect x="236" y="272" width="196" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="334.0" y="321.6" text-anchor="middle" font-size="18" fill="#0F1A14">Anonymised</text>
+<text x="334.0" y="345.0" text-anchor="middle" font-size="18" fill="#0F1A14">snapshots</text>
+<rect x="460" y="272" width="196" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="558.0" y="321.6" text-anchor="middle" font-size="18" fill="#0F1A14">Asks Jev</text>
+<text x="558.0" y="345.0" text-anchor="middle" font-size="18" fill="#0F1A14">typed questions</text>
+<rect x="684" y="272" width="196" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="782.0" y="321.6" text-anchor="middle" font-size="18" fill="#0F1A14">Caches</text>
+<text x="782.0" y="345.0" text-anchor="middle" font-size="18" fill="#0F1A14">the answers</text>
+<rect x="908" y="272" width="196" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="1006.0" y="309.9" text-anchor="middle" font-size="18" fill="#0F1A14">Scored against</text>
+<text x="1006.0" y="333.3" text-anchor="middle" font-size="18" fill="#0F1A14">baselines with</text>
+<text x="1006.0" y="356.7" text-anchor="middle" font-size="18" fill="#0F1A14">bootstrap CIs</text>
+<path d="M432 142 L460 142" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M656 142 L684 142" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M880 142 L908 142" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M432 327 L460 327" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M656 327 L684 327" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M880 327 L908 327" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M208 142 L236 142" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M208 327 L236 327" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="1144" y="92" width="120" height="290" rx="4" fill="#24412F" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="1204.0" y="219.9" text-anchor="middle" font-size="18" fill="#F3EBDC">Append-</text>
+<text x="1204.0" y="243.3" text-anchor="middle" font-size="18" fill="#F3EBDC">only</text>
+<text x="1204.0" y="266.7" text-anchor="middle" font-size="18" fill="#F3EBDC">notebook</text>
+<path d="M1112 142 L1144 142" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M1112 327 L1144 327" fill="none" stroke="#0F1A14" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="48" y1="456" x2="1264" y2="456" stroke="#0F1A14" stroke-width="1.5" stroke-dasharray="7 6"/>
+<rect x="528" y="438" width="256" height="36" rx="4" fill="#F2A516" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="656.0" y="461.6" text-anchor="middle" font-size="16" fill="#0F1A14">AST-checked walls</text>
+<rect x="48" y="520" width="420" height="110" rx="4" fill="#E8DDC8" stroke="#0F1A14" stroke-width="1.5"/>
+<text x="258.0" y="582.0" text-anchor="middle" font-size="20" fill="#0F1A14">Paper-order code</text>
+</g>
+</svg>

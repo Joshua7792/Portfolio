@@ -1,0 +1,62 @@
+/* Spec §7.4 (375): pad 48/56, back link, 32, badge, 16, h1, 16, lead. */
+.header {
+  position: relative;
+  overflow: hidden;
+  padding-block: 48px 56px;
+}
+
+.sparkles {
+  position: absolute;
+  inset: 0;
+  width: min(100%, 1440px); /* spec §4: container max width */
+  margin-inline: auto;
+  pointer-events: none;
+  color: var(--amber);
+}
+
+.sparkles > * { position: absolute; }
+
+/* Spec §7.4: one 40px sparkle centered at (335, 48 local) at 375, i.e. 20px from the right edge. */
+.sparkleMobile { top: 28px; right: 20px; }
+.sparkleLarge, .sparkleSmall { display: none; }
+
+.inner { position: relative; }
+
+.back {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.backIcon {
+  flex: none;
+  transition: transform 200ms var(--ease-out-strong);
+}
+
+.badge { margin-top: 32px; }
+.title { margin-top: 16px; color: var(--cream); }
+.lead { margin-top: 16px; max-width: 864px; color: var(--cream-muted); } /* spec §7.3: one-line cols 1-8 = 8x80 + 7x32 */
+
+@media (hover: hover) and (pointer: fine) {
+  .back:hover .backIcon { transform: translateX(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back:hover .backIcon { transform: none; }
+}
+
+@media (min-width: 1024px) {
+  /* Spec §7.3 (1440): pad 96/96, 48 gap to badge, 24 gaps, h1 cols 1-10 (1088), lead cols 1-8 (864). */
+  .header { padding-block: 96px; }
+  .badge { margin-top: 48px; }
+  .title { margin-top: 24px; max-width: 1088px; }
+  .lead { margin-top: 24px; }
+  .sparkleMobile { display: none; }
+  .sparkleLarge, .sparkleSmall { display: block; }
+  /* Sparkle 80 centered at (1312, 160 local); sparkle 32 centered at (1248, 232 local), measured in a 1440 frame. */
+  .sparkleLarge { top: 120px; right: 88px; } /* 160 - 40 = 120; 1440 - 1312 - 40 = 88 */
+  .sparkleSmall { top: 216px; right: 176px; } /* 232 - 16 = 216; 1440 - 1248 - 16 = 176 */
+}

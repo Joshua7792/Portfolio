@@ -1,0 +1,37 @@
+/* Spec §5: image frames are square-cornered; §6.16 placeholder keeps the same box and ratio. */
+.box {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--cream-deep);
+}
+
+.cover { aspect-ratio: 16 / 10; }
+.wide { aspect-ratio: 16 / 9; }
+
+/* color: transparent hides the browser's broken-image alt text if a file fails at runtime (R-2 T10); readers still get alt. */
+.image { object-fit: cover; color: transparent; }
+
+/* Phase 3 ruling S6 (R-2 F5): every cover and evidence image carries a 1px line-cream inner rule, drawn inside the
+   box so it stays 640x400 / 1312x820. */
+.box::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border: 1px solid var(--line-cream);
+  content: "";
+  pointer-events: none;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border: 1.5px dashed var(--muted);
+  background: var(--cream-deep);
+  color: var(--muted);
+  text-align: center;
+  word-break: break-all;
+}

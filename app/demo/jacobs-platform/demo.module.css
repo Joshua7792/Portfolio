@@ -1,0 +1,83 @@
+/* Spec §7.5 (375): banner sticky top 64, min-height 48, padding 12 20, text 13/18, 2 lines allowed. */
+.banner {
+  position: sticky;
+  z-index: 40;
+  top: 64px;
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  padding-block: 12px;
+  background: var(--amber);
+  color: var(--ink);
+}
+
+.bannerInner { display: flex; align-items: center; gap: 12px; }
+.bannerSparkle { color: var(--ink); }
+
+/* Header: pad 40/40, back link, 32, h1 36/40, 16, lead, 32, full-width md button. */
+.header { padding-block: 40px; }
+
+.back {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.backIcon { flex: none; transition: transform 200ms var(--ease-out-strong); }
+
+.title { margin-top: 32px; color: var(--cream); }
+.lead { margin-top: 16px; max-width: 864px; color: var(--cream-muted); } /* spec §7.5: lead cols 1-8 = 8x80 + 7x32 */
+.fullScreen { width: 100%; margin-top: 32px; }
+
+/* Frame: 16 gap, mobile note, iframe 335x560 with a 1.5px ink border and radius 12, then 16 and the caption. */
+.frameBand { padding-block: 16px 96px; background: var(--cream); color: var(--ink); }
+.mobileNote { margin-bottom: 16px; color: var(--muted); }
+
+.frame {
+  height: 560px;
+  overflow: hidden;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  background: var(--cream-deep);
+}
+
+.iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border-style: dashed;
+  border-color: var(--muted);
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.caption { margin-top: 16px; color: var(--muted); }
+
+@media (hover: hover) and (pointer: fine) {
+  .back:hover .backIcon { transform: translateX(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back:hover .backIcon { transform: none; }
+}
+
+/* R-2 T1: from 768 the pill sizes to its label (spec §6.2); full width is the phone layout only. */
+@media (min-width: 768px) {
+  .fullScreen { width: auto; }
+}
+
+@media (min-width: 1024px) {
+  /* Spec §7.5 (1440): banner h48 sticky at y 80; header pad 64/64; frame band pad 64/160; frame 1312 wide.
+     Phase 3 ruling S8: the frame is min(820px, 100svh - 80px) tall, so a short window still sees all of it under the
+     nav (exactly 820 at a 900-tall window, the §7.5 size). */
+  .banner { top: 80px; height: 48px; padding-block: 0; }
+  .header { padding-block: 64px; }
+  .frameBand { padding-block: 64px 160px; }
+  .mobileNote { display: none; }
+  .frame { height: min(820px, calc(100svh - 80px)); }
+}

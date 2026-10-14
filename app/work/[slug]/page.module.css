@@ -1,0 +1,31 @@
+/* Spec §7.4 (375): cover 335x209 after a 40 gap; the 64 bottom keeps the first section rule off the image. */
+.cover { padding-block: 40px 64px; }
+
+/* "What I built" list: 6x6 ink square markers, 20 indent, 12 between items (marker style from §6.13, ink because amber is banned on cream). */
+.list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.list li::before {
+  position: absolute;
+  top: calc(0.5lh - 3px); /* centred on the first line */
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--ink);
+  content: "";
+}
+
+@media (min-width: 1024px) {
+  /* Spec §7.3 (1440): 64 gap above the 1312x820 cover; 96 below to the first section rule. */
+  .cover { padding-block: 64px 96px; }
+}

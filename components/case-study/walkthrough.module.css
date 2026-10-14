@@ -1,0 +1,14 @@
+/* Walkthrough toggle (Phase 3 ruling on WCAG 2.2.2): a primary pill (spec §6.2) on the media's bottom-left corner,
+   44px tall (spec §9 touch target), 16 from the edges (spec §4 spacing). */
+.wrap { position: relative; }
+
+.toggle {
+  position: absolute;
+  z-index: 2; /* above the image and its 1px inner rule */
+  bottom: 16px;
+  left: 16px;
+  min-height: 44px;
+  padding-inline: 20px;
+  font-family: inherit;
+  cursor: pointer;
+}

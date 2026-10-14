@@ -1,0 +1,36 @@
+/* Spec §7.4 (375): pad 64/64, heading 28/32, 24 gap, prose full width. */
+.section { background: var(--cream); color: var(--ink); }
+
+.inner { position: relative; }
+
+.inner::before {
+  position: absolute;
+  top: 0;
+  right: var(--gutter);
+  left: var(--gutter);
+  height: 1px;
+  background: var(--line-cream);
+  content: "";
+}
+
+.row { display: grid; gap: 24px; padding-top: 64px; }
+.heading { color: var(--ink); }
+
+.prose { display: grid; gap: 16px; max-width: 640px; }
+.prose p { margin: 0; }
+
+.body { padding-top: 40px; }
+.inner { padding-bottom: 64px; }
+
+@media (min-width: 1024px) {
+  /* Spec §7.3 (1440): pad 96/96, h2c cols 1-4 (x 64-432), prose cols 5-11 (x 512, max 640), 48 gap to content. */
+  .row {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 32px;
+    padding-top: 96px;
+  }
+  .heading { grid-column: 1 / span 4; }
+  .prose { grid-column: 5 / span 7; }
+  .body { padding-top: 48px; }
+  .inner { padding-bottom: 96px; }
+}

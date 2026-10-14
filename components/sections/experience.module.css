@@ -1,0 +1,150 @@
+/* Experience timeline on ink: design spec §6.13, §7.1, §7.2, §12 (1440 row 14, 375 row 14). */
+
+.section {
+  padding-block: 96px; /* §4 section rhythm below lg */
+}
+
+.heading {
+  margin-bottom: 40px; /* §7.2: h2 not sticky, 40 gap */
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Mobile §6.13: grid 24px 1fr, gap 8; rail in col 1, date then content in col 2. */
+.item {
+  display: grid;
+  grid-template-areas: "rail date" "rail content";
+  grid-template-columns: 24px minmax(0, 1fr);
+  column-gap: 8px;
+  row-gap: 4px; /* §6.13 mobile: date, 4 gap, role */
+}
+
+.date {
+  grid-area: date;
+  color: var(--amber);
+}
+
+.rail {
+  position: relative;
+  grid-area: rail;
+}
+
+/* 1px line-ink rule centered in the rail, running the full item height. */
+.rail::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--line-ink);
+  content: "";
+}
+
+.spark {
+  position: absolute;
+  top: 3px; /* centered on the 18px date line */
+  left: 50%;
+  width: 12px; /* §6.13 mobile sparkle 12 */
+  height: 12px;
+  transform: translateX(-50%);
+  color: var(--amber);
+}
+
+.content {
+  grid-area: content;
+  padding-bottom: 48px; /* §6.13 mobile item padding-bottom 48 */
+}
+
+.role {
+  color: var(--cream);
+}
+
+.company {
+  margin-top: 8px;
+  color: var(--cream-muted);
+  font-size: 14px; /* §6.13 mobile: company .t-small 14/22 */
+  line-height: 22px;
+}
+
+.bullets {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--cream-muted);
+}
+
+.bullets > li {
+  position: relative;
+  padding-left: 20px; /* §6.13 text indent 20 */
+}
+
+.bullets > li::before {
+  position: absolute;
+  top: 12px; /* §6.13: 6x6 amber square 12px from the line top */
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--amber);
+  content: "";
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 160px; /* §4 */
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 32px;
+    align-items: start;
+  }
+
+  .heading {
+    position: sticky;
+    top: 128px; /* §7.1: nav 80 + 48 */
+    grid-column: 1 / 5;
+    margin-bottom: 0;
+  }
+
+  .timeline {
+    grid-column: 5 / 13; /* x 512 to 1376 at 1440 */
+  }
+
+  .item {
+    grid-template-areas: "date rail content";
+    grid-template-columns: 160px 48px minmax(0, 1fr); /* §6.13 */
+    row-gap: 0;
+    column-gap: 0;
+  }
+
+  .date {
+    padding-top: 7px; /* aligns the 20px date line with the 34px h3 first line */
+  }
+
+  .spark {
+    top: 9px; /* §6.13: centered on the h3 first line */
+    width: 16px;
+    height: 16px;
+  }
+
+  .content {
+    padding-bottom: 64px; /* §6.13 item padding-bottom 64 */
+  }
+
+}
+
+/* R-2 T2: the company line follows .t-body from 768 (18/30), so it is never smaller than the bullets under it. */
+@media (min-width: 768px) {
+  .company {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
