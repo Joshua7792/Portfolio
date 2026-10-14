@@ -5,7 +5,7 @@ export const site = siteSchema.parse(
 {
   "meta": {
     "siteTitle": "Joshua Santiago | AI-native software engineer",
-    "siteDescription": "AI-native software engineer in Puerto Rico. Production systems for regulated work, multi-agent Claude Code workflows, and results I measured.",
+    "siteDescription": "AI-native software engineer in Puerto Rico. I build production systems for regulated work and multi-agent Claude Code workflows, and I measure the results.",
     "ogTitle": "Joshua Santiago: what I built, with the numbers",
     "ogDescription": "Eight case studies: an agent operating system, a production reporting platform, a bilingual field app, and a negative LLM evaluation.",
     "name": "Joshua Santiago",
@@ -201,12 +201,12 @@ export const site = siteSchema.parse(
       "slug": "joshua-os",
       "title": "Joshua-OS",
       "status": "In production",
-      "period": "Aug 2026 – present",
+      "period": "Aug 2026 to present",
       "role": "Sole designer and operator",
       "stack": "Claude Code; Markdown agents and skills; Bash; PowerShell; Python; TypeScript; GitHub Actions; gitleaks",
       "links": {"repo":null,"demo":null},
       "demoNote": "",
-      "problem": "Agents without a system produce a pile of prompts. I run several live projects alone: a field app, a reporting platform and paper-trading labs. I needed one place that plans, builds, verifies and remembers. Plans and builds run in separate sessions. Parallel agents each get their own worktree so they never touch the same files. Every finished task is ticked in a todo the moment it is verified. Joshua-OS is that layer, in one git repo.",
+      "problem": "I run several live projects alone: a field app, a reporting platform and paper-trading labs. Agents without a system produce a pile of prompts, so I needed one place that plans, builds, verifies and remembers. Plans and builds run in separate sessions. Parallel agents each get their own worktree so they never touch the same files. Every finished task is ticked in a todo the moment it is verified. Joshua-OS is that layer, in one git repo.",
       "built": [
         "Wrote the SOP every project follows: coordinate, plan, build, verify, ship, learn. Every plan names the outcome it serves.",
         "Wrote 9 global rule files: TDD with 80% coverage, pass^k for critical paths, Telegram input treated as untrusted.",
@@ -236,7 +236,7 @@ export const site = siteSchema.parse(
       "slug": "jacobs-reporting-platform",
       "title": "Jacobs reporting and compliance platform",
       "status": "In production",
-      "period": "2026 – present",
+      "period": "2026 to present",
       "role": "Self-initiated; sole designer and developer",
       "stack": "Python 3.11; openpyxl; FastAPI; pydantic; vanilla JavaScript; hand-written SVG charts; Windows batch; Node test scripts",
       "links": {"repo":null,"demo":"/demo/jacobs-platform"},
@@ -271,12 +271,12 @@ export const site = siteSchema.parse(
       "slug": "jevtrade",
       "title": "JevTrade",
       "status": "Paper / sandbox",
-      "period": "Oct 8 – 13, 2026, a five-day sprint",
+      "period": "Oct 8 to 13, 2026, a five-day sprint",
       "role": "Sole owner; built with Claude Code subagents in parallel worktree lanes",
       "stack": "Python 3.12; pytest; ruff; uv; Alpaca paper API; TypeSafe Jev API; Telegram (send-only); Windows Task Scheduler",
       "links": {"repo":null,"demo":null},
       "demoNote": "",
-      "problem": "The project started from a third-party trading-bot blueprint. Before any strategy used a model, I wanted a measured answer. Does a commercial typed-judgment model (Jev, by TypeSafe) call BTC direction or regime better than trivial baselines? I fixed the pass bar in advance, sealed a holdout, and built a lab to score it. Paper account only. The answer was no.",
+      "problem": "The project started from a third-party trading-bot blueprint. Before any strategy used a model, I wanted to measure whether a commercial typed-judgment model (Jev, by TypeSafe) calls BTC direction or regime better than trivial baselines. I fixed the pass bar in advance, sealed a holdout, and built a lab to score it. Paper account only. The answer was no.",
       "built": [
         "A stdlib-only Python lab: hourly BTC bars since 2021 with a sha256 manifest, and a backtest engine with fees and slippage.",
         "Honesty harness: last 6 months sealed, one shot per strategy, walk-forward with purge, deflated Sharpe, and an auto-logged attempt notebook.",
@@ -294,7 +294,7 @@ export const site = siteSchema.parse(
         {"file":"walkthrough.gif","caption":"Scoring a cached replay in the terminal, ending on the verdict line."}
       ],
       "results": [
-        {"value":"47.3%","label":"direction hit rate (95% CI 46.4–48.3) vs 50.9% for always up"},
+        {"value":"47.3%","label":"direction hit rate (95% CI 46.4-48.3) vs 50.9% for always up"},
         {"value":"0.848","label":"regime Brier score vs 0.466 for the base rate; lower is better"},
         {"value":"17,005","label":"scored calls, 0 errors"}
       ],
@@ -304,7 +304,7 @@ export const site = siteSchema.parse(
       "slug": "jacobs-field-app",
       "title": "Jacobs field app",
       "status": "In progress",
-      "period": "Sep 2026 – present",
+      "period": "Sep 2026 to present",
       "role": "Product owner and lead engineer; built card by card with Claude Code subagents and independent reviewer agents",
       "stack": "Expo 57; React Native 0.86; React 19; TypeScript; Supabase Postgres; TanStack Query; zod; i18next; Jest; Playwright with axe; pgTAP; GitHub Actions",
       "links": {"repo":null,"demo":null},
@@ -338,12 +338,12 @@ export const site = siteSchema.parse(
       "slug": "megateam",
       "title": "MegaTeam",
       "status": "Paper / sandbox",
-      "period": "Oct 2026 – present",
+      "period": "Oct 2026 to present",
       "role": "Sole owner; built with Claude Code subagents in parallel worktree lanes",
       "stack": "Python 3.11; FastAPI; pydantic; SQLite; TypeSafe Jev API; Telegram Bot API; Windows Task Scheduler",
       "links": {"repo":null,"demo":null},
       "demoNote": "",
-      "problem": "A third-party guide described a memecoin desk run by AI judges. I wanted to see what it would do with real new listings, before any money. So the desk runs in shadow mode. It scans, judges and logs what it would buy, and a paper ledger scores each would-be trade. Its first paper trade lost 93.9%. That is the measurement working.",
+      "problem": "A third-party guide described a memecoin desk run by AI judges. I wanted to see what it would do with real new listings before any money went in, so the desk runs in shadow mode. It scans, judges and logs what it would buy, and a paper ledger scores each would-be trade. Its first paper trade lost 93.9%. The ledger recorded the loss, which is its job.",
       "built": [
         "A funnel across three chains: new pools from GeckoTerminal, free filters, dossiers, a Jev judge, then a pick made in code.",
         "The judge runs as its own loopback FastAPI service, holding the only API key, behind a constant-time shared secret.",
@@ -370,12 +370,12 @@ export const site = siteSchema.parse(
       "slug": "btc-paper-bot",
       "title": "BTC 5-minute paper bot",
       "status": "Paper / sandbox",
-      "period": "Oct 2026 – present",
+      "period": "Oct 2026 to present",
       "role": "Sole owner; built with Claude Code",
       "stack": "Node 22; ES modules; node --test; Claude CLI; Binance public API; CSV and JSONL",
       "links": {"repo":null,"demo":null},
       "demoNote": "",
-      "problem": "A trading guide claimed large profits from a 5-minute BTC bot. My audit of that bot found +$97.9k, not the claimed +$279k, and it bought both sides. So I tested the real question: can Claude call 5-minute BTC moves? Every call is logged. Bets happen only when rules in code allow, at a fake $5 stake.",
+      "problem": "A trading guide claimed large profits from a 5-minute BTC bot. My audit of that bot found +$97.9k, not the claimed +$279k, and it bought both sides. So I tested whether Claude can call 5-minute BTC moves. Every call is logged. Bets happen only when rules in code allow, at a fake $5 stake.",
       "built": [
         "A Node 22 runner with no runtime dependencies: every 5 minutes it fetches BTC from Binance and asks the Claude CLI.",
         "Claude runs as a child process with no shell and a cleaned environment. Invalid JSON throws instead of guessing.",
@@ -400,7 +400,7 @@ export const site = siteSchema.parse(
       "slug": "tulip-mes",
       "title": "Tulip MES apps",
       "status": "Shipped",
-      "period": "Dec 2025 – Mar 2026",
+      "period": "Dec 2025 to Mar 2026",
       "role": "Application Developer and Validation Engineer, Validation Resource Group",
       "stack": "Tulip; Jira",
       "links": {"repo":null,"demo":null},
@@ -459,7 +459,7 @@ export const site = siteSchema.parse(
       {
         "company": "Jacobs, Life Sciences Americas",
         "role": "Construction Coordinator / AI Developer / IT",
-        "period": "Apr 2026 – present",
+        "period": "Apr 2026 to present",
         "location": "Guaynabo, Puerto Rico",
         "bullets": [
           "Coordinate construction delivery and HSE compliance for a large capital construction program.",
@@ -470,7 +470,7 @@ export const site = siteSchema.parse(
       {
         "company": "Validation Resource Group",
         "role": "Application Developer and Validation Engineer",
-        "period": "Dec 2025 – Mar 2026",
+        "period": "Dec 2025 to Mar 2026",
         "location": "Cayey, Puerto Rico (medical device manufacturing client)",
         "bullets": [
           "Designed, developed and validated Tulip MES apps replacing paper shop-floor processes and electronic batch record workflows.",
@@ -481,7 +481,7 @@ export const site = siteSchema.parse(
       {
         "company": "Alpine Health Technology",
         "role": "Back End Developer I",
-        "period": "Jun 2025 – Aug 2025",
+        "period": "Jun 2025 to Aug 2025",
         "location": "Guaynabo, Puerto Rico",
         "bullets": [
           "Developed and optimized SQL queries across health plan applications.",
@@ -492,7 +492,7 @@ export const site = siteSchema.parse(
       {
         "company": "Granicus",
         "role": "Software Engineer",
-        "period": "May 2024 – Dec 2024",
+        "period": "May 2024 to Dec 2024",
         "location": "San Juan, Puerto Rico",
         "bullets": [
           "Built and maintained full stack web apps across .NET and Java back ends for public sector case management.",
@@ -503,7 +503,7 @@ export const site = siteSchema.parse(
       {
         "company": "Granicus",
         "role": "Software Engineer Intern",
-        "period": "Oct 2023 – Apr 2024",
+        "period": "Oct 2023 to Apr 2024",
         "location": "San Juan, Puerto Rico",
         "bullets": [
           "Supported full stack application maintenance in C#, SQL and JavaScript.",
@@ -518,13 +518,13 @@ export const site = siteSchema.parse(
       {
         "school": "Peru State College",
         "credential": "Bachelor of Science, triple major in Computer Information Systems, Accounting, and Business Administration",
-        "period": "2017 – 2022",
+        "period": "2017 to 2022",
         "line": ""
       },
       {
         "school": "Holberton Coding School, San Juan, Puerto Rico",
         "credential": "Software Engineering, 9 Month Certificate Program",
-        "period": "Jun 2023 – Mar 2024",
+        "period": "Jun 2023 to Mar 2024",
         "line": "Capstone: HealHub, a health management web app built with Node.js, Python, Django, PostgreSQL and AWS."
       }
     ]

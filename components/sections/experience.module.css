@@ -148,3 +148,30 @@
     line-height: 30px;
   }
 }
+
+/* SC-1 (artifacts/scrollcraft/BRIEF.md, Experience: trust). While the heading holds (sticky, spec §7.1), the timeline
+   draws itself: an amber line runs down each role's rule as that role crosses the middle of the viewport (bottom inset
+   50%), so the record fills in at reading pace and stays drawn. transform only; off under reduced motion. */
+.spark { z-index: 1; } /* the sparkle stays above the drawn line */
+
+@keyframes rail-draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .rail { view-timeline: --rail block; view-timeline-inset: 0% 50%; }
+    .rail::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      translate: -50% 0;
+      transform-origin: top;
+      background: var(--amber);
+      content: "";
+      animation: rail-draw linear both;
+      animation-timeline: --rail;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}

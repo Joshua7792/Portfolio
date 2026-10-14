@@ -157,3 +157,19 @@
   .card:hover .icon { transform: translate(2px, -2px); }
 }
 
+
+/* SC-1 (artifacts/scrollcraft/BRIEF.md, Work: appetite). A featured screenshot draws into its frame top to bottom as
+   the card rises into view, like a screen refreshing; the frame and its rule are already there. Read from the cover's
+   own position (view timeline), so it scrubs both ways and is complete once the cover is fully on screen. clip-path
+   only; nothing moves, so layout and CLS are untouched. Off under reduced motion and where scroll timelines are missing. */
+@keyframes cover-refresh { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .featured .cover > :global(img) {
+      animation: cover-refresh linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}

@@ -133,6 +133,7 @@
   .inlineIcon { display: none; }
 
   .circle {
+    position: relative; /* SC-1: contains the fill disc */
     display: grid;
     width: 48px; /* §6.12: 48 circle, 1.5px amber border */
     height: 48px;
@@ -171,4 +172,103 @@
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
   .row:hover .builtText::after { opacity: 1; }
+}
+
+/* SC-1 signature (artifacts/scrollcraft/BRIEF.md, the peak). As each row crosses the middle of the viewport, the
+   sparkle mark runs along the row's bottom rule like a print head, printing it as a three-line amber scanline band, and the disc fills: the
+   requirement is locked onto the project that proves it. By the end of the ledger every rule is amber. Each state is
+   read from the row's own position (view timeline, bottom inset 50% so it runs while the row crosses the middle), so
+   it scrubs both ways, needs no JavaScript and lands right after a jump from a nav link. The trace sits on the rule
+   between rows, never across the copy. Only transform, translate, rotate, scale and opacity animate. */
+.row { position: relative; }
+
+.trace {
+  position: absolute;
+  right: 0;
+  bottom: -1px; /* the band's last line sits on the 1px line-forest rule */
+  left: 0;
+  height: 10px; /* three scanlines, inside the row's bottom padding (24 / 32) */
+  overflow-x: clip; /* the line is clipped to the row; the head may overhang vertically */
+  pointer-events: none;
+}
+.traceLine {
+  position: absolute;
+  inset: 0;
+  /* The display word's scanline language (spec §6.4): 2px amber lines, 2px apart. */
+  background: repeating-linear-gradient(to bottom, var(--amber) 0, var(--amber) 2px, transparent 2px, transparent 4px);
+  translate: -100% 0; /* at rest the rule is the plain spec rule */
+}
+.traceHead {
+  position: absolute;
+  top: 5px; /* centred on the band */
+  right: 0;
+  width: 16px;
+  height: 16px;
+  translate: 50% -50%; /* centred on the line's leading end */
+  color: var(--amber);
+  opacity: 0;
+}
+
+.circleIcon {
+  position: relative; /* above the fill disc */
+  grid-area: 1 / 1;
+}
+.circleFill {
+  position: absolute;
+  inset: -1.5px; /* covers the 1.5px ring */
+  border-radius: 9999px;
+  background: var(--amber);
+  opacity: 0;
+}
+.circleIconLocked {
+  color: var(--ink); /* ink on amber 8.63:1 (spec §2.2) */
+  opacity: 0;
+}
+
+@keyframes proof-trace { from { translate: -100% 0; } to { translate: 0 0; } }
+@keyframes proof-head {
+  from { opacity: 0; rotate: 0deg; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  to { opacity: 0; rotate: 180deg; }
+}
+@keyframes proof-fill { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
+@keyframes proof-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes proof-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes proof-nudge { from { translate: 0 0; } to { translate: 4px 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .row { view-timeline: --proof-row block; view-timeline-inset: 0% 50%; }
+
+    .traceLine,
+    .traceHead,
+    .circleFill,
+    .circleIconLocked,
+    .circleIcon:not(.circleIconLocked),
+    .inlineIcon {
+      animation-timeline: --proof-row;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+    .traceLine { animation-name: proof-trace; animation-range: entry 0% entry 80%; }
+    .traceHead { animation-name: proof-head; animation-range: entry 0% entry 80%; }
+    /* The disc fills as the head arrives at the right edge, where the circle is. */
+    .circleFill { animation-name: proof-fill; animation-range: entry 60% entry 85%; }
+    .circleIconLocked { animation-name: proof-in; animation-range: entry 60% entry 85%; }
+    .circleIcon:not(.circleIconLocked) { animation-name: proof-out; animation-range: entry 60% entry 85%; }
+    .inlineIcon { animation-name: proof-nudge; animation-range: entry 60% entry 85%; }
+  }
+}
+
+@media (min-width: 1024px) {
+  .traceHead { width: 24px; height: 24px; } /* spec §6.3 sparkle sizes: 16 mobile, 24 desktop */
+}
+
+/* Reduced motion: nothing moves; the ledger shows its finished state, every rule amber and every disc filled. */
+@media (prefers-reduced-motion: reduce) {
+  .traceLine { translate: 0 0; }
+  .circleFill,
+  .circleIconLocked { opacity: 1; }
+  .circleIcon:not(.circleIconLocked) { opacity: 0; }
 }

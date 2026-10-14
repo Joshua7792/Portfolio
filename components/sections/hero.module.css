@@ -262,3 +262,51 @@
   .badge:hover { transform: scale(1.04); }
   .badge:hover:active { transform: scale(0.97); }
 }
+
+/* SC-1 scroll-craft, dimensional hero (artifacts/scrollcraft/BRIEF.md). The poster is four plates that already overlap
+   at rest: echoes (far, z1) < print (portrait and its printed sparkles, z2) < striped word (z3) < corner sparkles (near,
+   z4). As the hero leaves the top of the viewport each plate travels further than the one behind it, so the word lifts
+   off its echoes and the print slides up across them. Copy (headline, handles, badge) rides at 1x. Every value is the
+   identity at the start of the range, so scroll 0 paints exactly the static composition and first paint never waits on
+   JavaScript. Only `translate` moves: the entrance keyframes own `transform` on other elements, so the two never meet.
+   --travel is extra upward travel across the hero's exit; --pd-x / --pd-y are pointer depth in px per unit of --mx/--my
+   (written by components/scroll/hero-depth.tsx on desktop fine pointers only). */
+.wordPlane {
+  position: relative;
+  z-index: 3; /* a translated plane is a stacking context; keep the word above the print (spec §6.4) */
+}
+
+@keyframes hero-depth {
+  from { translate: calc(var(--mx, 0) * var(--pd-x)) calc(var(--my, 0) * var(--pd-y)); }
+  to { translate: calc(var(--mx, 0) * var(--pd-x)) calc(var(--my, 0) * var(--pd-y) + var(--travel)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero { view-timeline: --hero block; }
+
+  .word :global(.echo-word) { --pd-x: -6px; --pd-y: -4px; }
+  .frame, .sparkles { --pd-x: -10px; --pd-y: -6px; --travel: -40px; }
+  .wordPlane { --pd-x: -16px; --pd-y: -10px; --travel: -80px; }
+  .nearSparkles { --pd-x: -24px; --pd-y: -14px; --travel: -96px; }
+
+  .word :global(.echo-word),
+  .frame,
+  .sparkles,
+  .wordPlane { translate: calc(var(--mx, 0) * var(--pd-x)) calc(var(--my, 0) * var(--pd-y)); }
+
+  @supports (animation-timeline: view()) {
+    .frame,
+    .sparkles,
+    .wordPlane {
+      animation: hero-depth linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 55%; /* front-loaded: the plates part while the word is still on screen */
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+  .frame, .sparkles { --travel: -88px; }
+  .wordPlane { --travel: -168px; }
+  .nearSparkles { --travel: -200px; }
+}

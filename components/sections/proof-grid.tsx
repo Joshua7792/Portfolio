@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { Reveal } from "@/components/ui/reveal";
+import { Sparkle } from "@/components/ui/sparkle";
 import { site } from "@/content/site";
 import styles from "./proof-grid.module.css";
 
@@ -17,7 +18,12 @@ function caseTitle(slug: string): string {
   return title;
 }
 
-/** Spec §6.12 / §7.1 proof grid on forest: each row is one link from a job requirement to the case study that meets it. */
+/**
+ * Spec §6.12 / §7.1 proof grid on forest: each row is one link from a job requirement to the case study that meets it.
+ * SC-1 signature (artifacts/scrollcraft/BRIEF.md): as each row crosses the middle of the viewport, the sparkle mark runs
+ * along its bottom rule drawing it in amber and the arrow disc fills: the requirement is locked onto its case study.
+ * Pure CSS scroll timelines in proof-grid.module.css; the trace is decorative (aria-hidden).
+ */
 export function ProofGrid() {
   const { heading, rows } = site.proofGrid;
   return (
@@ -47,7 +53,14 @@ export function ProofGrid() {
                         <Icon className={styles.inlineIcon} name="arrow-right" />
                       </p>
                     </div>
-                    <span aria-hidden="true" className={styles.circle}><Icon className={styles.circleIcon} name="arrow-right" /></span>
+                    <span aria-hidden="true" className={styles.circle}>
+                      <span className={styles.circleFill} />
+                      <Icon className={styles.circleIcon} name="arrow-right" />
+                      <Icon className={`${styles.circleIcon} ${styles.circleIconLocked}`} name="arrow-right" />
+                    </span>
+                    <span aria-hidden="true" className={styles.trace}>
+                      <span className={styles.traceLine}><Sparkle className={styles.traceHead} size={24} /></span>
+                    </span>
                   </Link>
                 </Reveal>
               </li>

@@ -308,3 +308,21 @@ main[tabindex="-1"]:focus { outline: none; }
   .menu-enter { animation-name: menu-fade-in; animation-duration: var(--menu-close); }
   .menu-enter .menu-item { animation: none; }
 }
+
+/* SC-1 close (artifacts/scrollcraft/BRIEF.md, Close: resolve). Home only. The outlined name in the footer locks into
+   place as it arrives: "Joshua" from the left, "Santiago" from the right, meeting in the spec lockup exactly when the
+   word is fully on screen, then holding through the last screen. translate only (the footer clips its overflow);
+   the resting state is the spec composition; off under reduced motion and where scroll timelines are missing. */
+@keyframes footer-lock-left { from { translate: -8vw 0; } to { translate: 0 0; } }
+@keyframes footer-lock-right { from { translate: 8vw 0; } to { translate: 0 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    body:has(#hero) .footer-word { view-timeline: --footer-word block; }
+    body:has(#hero) .footer-word > .t-footer {
+      animation: footer-lock-left linear both;
+      animation-timeline: --footer-word;
+      animation-range: entry 0% entry 100%;
+    }
+    body:has(#hero) .footer-word > .t-footer + .t-footer { animation-name: footer-lock-right; }
+  }
+}

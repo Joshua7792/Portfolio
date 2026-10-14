@@ -1,3 +1,4 @@
+import { HeroDepth } from "@/components/scroll/hero-depth";
 import { DisplayWord } from "@/components/ui/display-word";
 import { ImageFrame } from "@/components/ui/image-frame";
 import { Sparkle } from "@/components/ui/sparkle";
@@ -38,14 +39,18 @@ export function Hero() {
     <section aria-labelledby="hero-name" className={styles.hero} data-surface="dark" id="hero" style={motionVars}>
       <h1 className="sr-only" id="hero-name">{meta.name}</h1>
       <div className={`container ${styles.stage}`}>
-        <DisplayWord className={styles.word} word={hero.displayWord} />
+        <DisplayWord className={styles.word} planeClassName={styles.wordPlane} word={hero.displayWord} />
         <div className={styles.portrait}>
           <ImageFrame alt={hero.portraitAlt} className={styles.frame} priority required
             sizes="(min-width: 1024px) 416px, (min-width: 768px) 320px, 240px" src="/images/hero-portrait.webp" />
         </div>
+        {/* SC-1: two sparkle planes over the same box. Sparkles 1-2 are printed on the portrait and travel with it;
+            the corner sparkles are the nearest plane and pass it. */}
         <div aria-hidden="true" className={styles.sparkles}>
           <Sparkle className={`${styles.sparkle} ${styles.s1}`} size={48} />
           <Sparkle className={`${styles.sparkle} ${styles.s2}`} size={28} />
+        </div>
+        <div aria-hidden="true" className={`${styles.sparkles} ${styles.nearSparkles}`}>
           <Sparkle className={`${styles.sparkle} ${styles.s3}`} size={28} />
           <Sparkle className={`${styles.sparkle} ${styles.s4}`} size={56} />
           <Sparkle className={`${styles.sparkle} ${styles.m1}`} size={32} />
@@ -72,6 +77,7 @@ export function Hero() {
           </a>
         </div>
       </div>
+      <HeroDepth targetId="hero" />
     </section>
   );
 }
